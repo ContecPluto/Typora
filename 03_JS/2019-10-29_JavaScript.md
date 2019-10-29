@@ -48,7 +48,39 @@ const : 할당 및 선언 모두 한번만 / 블록 스코프
 2. 대소문자를 구별하며 클래스명을 제외하고는 대문자로 시작하지 않는것이 좋다.
 3. 예약어는 사용 불가능(class, super, const, case, function, ....)
 
- 
+ ```javascript
+// 식별자 작성 스타일
+// 1. 카멜 케이스(camelCase) - 객체, 변수, 함수(=lower-camel-case)
+let dog
+let variableName
+
+// 배열은 복수형 변수명을 사용
+const dogs = []
+
+// 정규 표현식은 'r' 로 시작
+const rDecs = /.*/
+
+// 함수
+function getPropertyName() {
+  return 1
+}
+
+// boolean 을 반환하는 변수나 함수 - 'is' 로 시작
+let isAvilable = false
+
+// 2. 파스칼 케이스(PascalCase) - 클래스, 생성자 (=== upper-camel-case)
+class User{
+  constructor(options) {
+    this.name = option.name
+  }
+}
+
+// 3. 대문자 스네이크 메이스(SNAKE_CASE) - 상수
+// 이 표현은 변수와 변수의 속성이 변하지 않는다는 것을 프로그래머에게 알려준다.
+const API_KEY = 'aasdasdacvsvsadv3r1qwqwr2#!@#!2r2'
+ ```
+
+
 
 
 
@@ -56,8 +88,63 @@ const : 할당 및 선언 모두 한번만 / 블록 스코프
 
 - 이 개념은 JS변수, 함수나 표현이 최상단으로 올려지는 것을 말한다.
 - 끌어 올려진 변수는 `undefined`값을 반환한다.
-
 - 변수와 함수를 위한 메모리 공간을 확보하는 과정
+
+```javascript
+console.log(a) // undefined
+var a = 10
+console.log(a)
+
+// JS 가 이해한 코드
+var a // (선언과 초기화)
+console.log(a) // undefined
+a = 10 // (할당)
+console.log(a)
+
+// let 은 안된다. ReferenceError
+// console.log(b)
+// let b = 10
+// console.log(b)
+
+// 마찬가지로 아래와 같은 가정을 거친다.
+let b // 선언 + TDZ
+console.log(b)
+b = 10 // 할당 불가 (초기화가 아직 안됨)
+console.log(b)
+
+
+if (x !== 1) {
+  console.log(y) // undefined
+  var y = 3
+  if (y === 3) {
+    var x = 1
+  }
+  console.log(y) // 3
+}
+
+if (x === 1) {
+  console.log(y) // 3
+}
+
+// JS 가 이해한 코드
+var x
+var y
+
+if (x !== 1) {
+  console.log(y) // undefined
+  var y = 3
+  if (y === 3) {
+    var x = 1
+  }
+  console.log(y) // 3
+}
+
+if (x === 1) {
+  console.log(y) // 3
+}
+```
+
+
 
 ---
 
@@ -95,10 +182,44 @@ Babel 로 ES6+ 문법을 그보다 아래 버전의 JS로 변경해서 사용하
    - `infinity` : 양의 무한대와 음의 문한대로 나뉨
    - `NaN` : Not a Number, 표현할 수 없는 값, 자기 자신과 일치하지 않는 유일한 값을 표현
      - ex) 0/0, "문자" *10, Math.sqrt(-9)
+   
 2. Strings
+
+   ```javascript
+   // 문자열
+   const sentence1 = 'sentence'
+   const sentence2 = "sentence"
+   const sentence3 = `sentence`
+   const sentence4 = `sentence`
+   
+   // backtick `
+   // const word = "안녕 
+   // 하세요"
+   // console.log(word)
+   
+   const word1 = "안녕 \n하세요"
+   console.log(word1)
+   
+   const word2 = `안녕
+   하세요`
+   console.log(word2)
+   
+   // Template Literal
+   // JS 에서 문자열을 입력하는 방식
+   const age = 10
+   const message = `홍길동은 ${age}
+   세 입니다.`
+   console.log(message)
+   
+   const happy = 'hello'
+   const hacking = 'world!' + 'lol' + '!!!'
+   console.log(happy, hacking)
+   ```
+
 3. Bollean
    - true
    - false
+
 4. Empty Value
 
 ##### 4.1.1.1 Literal
@@ -145,17 +266,10 @@ hotelRoom = conference_room
      console.log(last_name) // null - 의도적으로 값이 없음을 표현
      ```
 
-     
-
-     
 
 #### 4.1.2 Reference
 
 
-
-
-
-### 
 
 
 
