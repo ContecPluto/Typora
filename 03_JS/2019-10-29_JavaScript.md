@@ -269,14 +269,135 @@ hotelRoom = conference_room
 
 #### 4.1.2 Reference
 
+##### 4.1.2.1 할당연산자
+
+```javascript
+let c = 0
+undefined
+c += 10
+10
+console.log(c)
+10
+c -= 3
+7
+c *= 10
+70
+
+c++
+71
+
+c --
+70
+```
+
+`false ? 1 : 2` false를 찾음
+
+```javascript
+const result = Math.PI > 4 ? 'YES!' : 'no!!'
+undefined
+```
 
 
 
+## 5. if, switch
+
+### 5.1 if
+
+`const userName = prompt('Hello! who r u??')` 를 통해 
+
+```javascript
+if (userName === '1q2w3e4r') {
+    message = '<h1>This is admin page</h1>'
+} else if (userName === 'ssafy') {
+    message = '<h1>You r from ssafy</h1>'
+} else {
+    message = `<h1>hello ${userName}</h1>`
+}
+```
 
 
 
+### 5.2 switch
+
+````javascript
+switch (userName) {
+  case '1q2w3e4r': {
+    message = '<h1>This is admin</h1>'
+    console.log(message)
+  }
+  case 'ssafy': {
+    message = '<h1>you r from ssafy</h1>'
+    console.log(message)
+  }
+  default: {
+    message = `<h1>hello ${userName}</h1>`
+    console.log(message)
+  }
+}
+````
+
+```javascript
+switch (userName) {
+  case '1q2w3e4r': {
+    message = '<h1>This is admin</h1>'
+    break
+  }
+  case 'ssafy': {
+    message = '<h1>you r from ssafy</h1>'
+    break
+  }
+  default: {
+    message = `<h1>hello ${userName}</h1>`
+  }
+}
+```
+
+switch문은 break 가 없으면 멈추지않고 디폴트까지 가서 최종적으로 디폴트가 출력이된다.
 
 
+
+## 6. 반복문
+
+### 6.1 while
+
+```javascript
+let i = 0
+
+while (i < 6) {
+  console.log(i)
+  i++
+}
+```
+
+
+
+### 6.2 for
+
+```javascript
+for (let j = 0; j < 6; j++) {
+  console.log(j)
+}
+
+console.log()
+const numbers = [0, 1, 2, 3, 4, 5, ]
+
+for (let number of numbers) {
+  console.log(number)
+}
+
+for (let number of [0, 1, 2, 3, 4, 5, ]) {
+  console.log(number)
+}
+
+for (const number of [0, 1, 2, 3, 4, 5, ]) {
+  console.log(number)
+}
+// let과 const 는 선택
+```
+
+
+
+## 7. function
 
 
 
