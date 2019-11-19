@@ -18,6 +18,8 @@ Vue => Backend
 
 - Client의 입장에서는 HTTP header에 세션ID/ 토큰을 실어서 보낸다는 점은 동일하지만, Server의 입장에서는 인증을 위해 암호화 (JWT 방식)를 하냐 혹은 별도의 저장소(세션/쿠키 방식)를 이용하느냐의 차이.
 
+- 주류 프로그래밍언어가 모두 지원한다.
+
   
 
 - 사용처
@@ -91,6 +93,8 @@ Vue => Backend
 
 ## 2. router
 
+> vue ui를 이용해 창을 실행해 설치한다.
+
 ### 2.1 router-link
 
 - router 지원 앱에서 사용자 네비게이션을 가능하게하는 컴포넌트
@@ -128,3 +132,70 @@ Vue => Backend
 1. 서버(django)와 클라이언트(vue)가 같은 도메인과 포트를 사용하도록 한다.
 2. 서버에서 cross-origin HTTP 요청을 허가한다. (우리가 해결할 방법)
    - 실제 API 서버들은 이러한 CORS 제한과 관련된 처리를 모두 해두어야한다.
+
+
+
+---
+
+사용 라이브러리 (파이썬)
+
+- DRF
+- DRF-jwt
+  - https://github.com/jpadilla/django-rest-framework-jwt
+- cors
+  - https://github.com/adamchainz/django-cors-headers
+
+ npm i vue-session
+
+![image](https://user-images.githubusercontent.com/52685373/69108430-f7bef000-0ab7-11ea-8074-fb950db61d3b.png)
+
+**this.$session.start()**
+
+- session-id 초기화. 만약 세션이 없이 저장하려고 하면 vue-session 플러그인이 자동으로 새로운 세션을 시작
+
+**this.$session.set(key,value)**
+
+- session 에 해당 key 에 맞는 값을 저장
+
+**this.$session.has(key)**
+
+- key(JWT)가 존재하는지 여부를 확인
+
+**this.$session.destroy()**
+
+- 세션을 삭제
+
+
+
+흐름
+
+1. Django - 회원가입 
+2. Vue => Django - 로그인 정보(credentials)를 django 서버로 보낸다. 
+3. Django - Vue 에서 받은 유저정보에 해당하는 고유한 Web Token(JWT) 발급
+4. Django => Vue - 해당 유저에 대한 토큰을 Vue로 보낸다.
+5. Vue - Django에서 받은 토큰을 vue-session 을 통해 저장한다. ( 이 시점부터 vue 에서는 로그인 성공 상태)
+6. Vue => Django || vue-session에 저장된 토큰을 가지고 django에 로그인 요청
+7. Django || 최초로 보낸 토큰과 일치하는지 여부를 확인(세션에 저장된 토큰 == 요청자의 토큰)
+
+.start() 를 통해 `session-id:sess+Date.now()`가 만들어진다.
+
+.set() 을 통해 `jwt:jwt 값`이 만들어진다.
+
+---
+
+Vue - 라이프사이클
+
+1. Vue instance 생성 (create)
+2. DOM 에 부착(mounted)
+3. 업데이트 (Update)
+4. 사라짐(destroy)
+
+---
+
+**FormData**
+
+- 기존 키에 새로운 값을 추가하거나 키가 없는 경우 새로운 키를 추가.(`FormData.append()`)
+- `FormData.append(name, value)`
+- name: value에 포함되는 데이터 필드 이름
+- value는 필드 값
+
